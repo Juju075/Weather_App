@@ -86,8 +86,37 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+
+/* => today */
+.future-forecast .today {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* => today .day */
+.future-forecast .today .day {
+  padding: 5px 15px;
+  background: #3c3c44;
+  border-radius: 50px;
+  text-align: center;
+}
+/* => today .temp */
+.future-forecast .today .temp {
+  font-size: 18px;
+  padding-top: 15px;
+}
+
 /* => weather-forecast */
 /* https://openweathermap.org/weather-conditions */
+/* justify content pour centrer */
 .future-forecast .weather-forecast {
   display: flex;
+}
+
+.weather-forecast .weather-forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
 }
