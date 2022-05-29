@@ -50,4 +50,44 @@ body {
 
 .place-container .time-zone {
   font-size: 30px;
+  font-weight: 100px;
+}
+.place-container .country {
+  font-size: 12px;
+  font-weight: 700px;
+}
+
+/* CURRENT-INFO */
+.current-info .others {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(24, 24, 27, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+  border: 1px solid #eeee;
+}
+
+.current-info .others .weather-item {
+  display: flex;
+  justify-content: space-between;
+}
+/* FIN CONTAINER */
+
+/* FUTURE-FORECAST */
+.future-forecast {
+  background: rgba(24, 24, 27, 0.6);
+  padding: 25px;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  color: #fff;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+/* => weather-forecast */
+/* https://openweathermap.org/weather-conditions */
+.future-forecast .weather-forecast {
+  display: flex;
 }
