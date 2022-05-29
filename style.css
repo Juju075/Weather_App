@@ -13,26 +13,41 @@ body {
   height: 100vh;
   font-family: "Poppin", sans-serif;
 }
-/* */
+
+/* .CONTAINER */
 .container {
   padding: 20px 70px;
   color: #fff;
 }
+/* => .current-info */
 .current-info {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-/* colone date container */
+
+/* DATE-CONTAINER */
 .date-container {
   font-weight: 100;
 }
-/* Horloge | .date-container puis on vas chercher #am-pm */
+/* => .time */
 .date-container .time {
   font-size: 70px;
 }
-/* | .date-container puis on vas chercher #am-pm */
+/* => .time #am-pm */
 .date-container #am-pm {
   font-size: 30px;
   margin-left: 20px;
+}
+/* => .date*/
+.date-container .date {
+  font-size: 30px;
+}
+/* PLACE-CONTAINER */
+.place-container {
+  text-align: end;
+}
+
+.place-container .time-zone {
+  font-size: 30px;
 }
