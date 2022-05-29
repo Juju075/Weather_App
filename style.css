@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
 }
+/* Décortique la structure html ligne par ligne */
 body {
   background: url("https://images.unsplash.com/photo-1621274403997-37aace184f49?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1");
   background-repeat: no-repeat;
@@ -11,4 +12,27 @@ body {
   overflow: hidden;
   height: 100vh;
   font-family: "Poppin", sans-serif;
+}
+/* */
+.container {
+  padding: 20px 70px;
+  color: #fff;
+}
+.current-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+/* colone date container */
+.date-container {
+  font-weight: 100;
+}
+/* Horloge | .date-container puis on vas chercher #am-pm */
+.date-container .time {
+  font-size: 70px;
+}
+/* | .date-container puis on vas chercher #am-pm */
+.date-container #am-pm {
+  font-size: 30px;
+  margin-left: 20px;
 }
