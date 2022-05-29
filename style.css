@@ -120,3 +120,15 @@ body {
   justify-content: center;
   margin: 0 10px;
 }
+
+/**/
+.weather-forecast .weather-forecast-item .day {
+  padding: 5px 15px;
+  background-color: #3c3c44;
+  border-radius: 50px;
+  text-align: center;
+}
+/**/
+.weather-forecast .weather-forecast-item .temp {
+  font-weight: 100;
+}
