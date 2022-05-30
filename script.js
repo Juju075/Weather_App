@@ -30,6 +30,9 @@ const months = [
   "Nov",
   "Dec"
 ];
+
+const API_KEY = "79fe865edaa858ac2767c81e9af5cc8b";
+
 //2-
 
 /**
@@ -77,3 +80,55 @@ setInterval(() => {
   //days[day] months[month] javascript months array
   dateEl.innerHTML = days[day] + "," + date + " " + months[month];
 }, 1000);
+
+getWeatherData();
+
+//FUNCTION Promise - Call API  callback and option.
+/**
+ * API Fetch | moyen facile et logique de récupérer des ressources à travers le réseau
+ * de manière asynchrone.
+ */
+//$jquery prefix variables https://learn.jquery.com/using-jquery-core/dollar-object-vs-function/
+function getWeatherData() {
+  navigator.geolocation.getCurrentPosition((success) => {
+    let { latitude, longitude } = success.coords;
+
+    // 401 "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."
+    //fetch les seuls elements qui nous interesse   requete > response sous forme json >
+    fetch(
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+    )
+      //resolute
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        //showWeatherData(data);
+      });
+  });
+
+  /**
+   * Moment.js 2.29.3
+   * Parse, validate, manipulate,
+   * and display dates and times in JavaScript.
+   * https://momentjs.com/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library
+   *
+   * get momentJS from window?
+   * Just bind your moment to window.moment bind(=lier)
+   */
+  function showWeatherData(data) {
+    console.log(data.current);
+    //data.current est le tableau de toute les data  let {xxx} selectionne les seuls elemeents desire
+    let { humidity, pressure, sunrise, sunset, wind_speed } = data.current;
+
+    currentWeatherItemsEl.innerHTML = `<div>Humidity</div>
+    <div>${humidity}</div>
+    <div>Pressure</div>
+    <div>${pressure}</div>
+    <div>Wind Speed</div>
+    <div>${wind_speed}</div>
+    <div>Sunrise</div>
+    <div>${window.moment(sunrise).format("HH:mm a")}</div>
+    <div>Sunset</div>
+    <div>${window.moment(sunset).format("HH:mm a")}</div>`;
+  }
+}
