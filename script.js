@@ -60,10 +60,10 @@ setInterval(() => {
   const hoursIn12HrFormat = hour >= 13 ? hour % 12 : hour;
   //console.log(hoursIn12HrFormat);
 
-  const minutes = time.getMinutes();
+  const minutes = time.getMinutes(); //2 decimales
   //console.log(minutes);
 
-  const ampm = hour >= 12 ? "PM" : "AM";
+  const ampm = hour >= 12 ? "PM" : "AM"; //ternaire
   //console.log(ampm);
 
   //Affectation selecteur heure.
@@ -102,7 +102,7 @@ function getWeatherData() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        //showWeatherData(data);
+        showWeatherData(data);
       });
   });
 
@@ -117,18 +117,85 @@ function getWeatherData() {
    */
   function showWeatherData(data) {
     console.log(data.current);
-    //data.current est le tableau de toute les data  let {xxx} selectionne les seuls elemeents desire
-    let { humidity, pressure, sunrise, sunset, wind_speed } = data.current;
+    //data.current est le tableau de toute les datas  let {xxx} conserve uniquement les elements desiré.
+    let {humidity, pressure, sunrise, sunset, wind_speed} = data.current;
 
-    currentWeatherItemsEl.innerHTML = `<div>Humidity</div>
-    <div>${humidity}</div>
+    //template
+    //Block today <div class="today" id="current-temp">
+    currentWeatherItemsEl.innerHTML = 
+    `<div class="weather-item">
+    <div>Humidity</div>
+    <div>${humidity}%</div>
+    </div>
+    <div class="weather-item">
     <div>Pressure</div>
     <div>${pressure}</div>
+    </div>
+    <div class="weather-item">
     <div>Wind Speed</div>
     <div>${wind_speed}</div>
+    </div>
+    <div class="weather-item">
     <div>Sunrise</div>
-    <div>${window.moment(sunrise).format("HH:mm a")}</div>
+    <div>${window.moment(sunrise * 1000).format('HH:mm a')}</div>
+    </div>
+    <div class="weather-item">
     <div>Sunset</div>
-    <div>${window.moment(sunset).format("HH:mm a")}</div>`;
+    <div>${window.moment(sunset*1000).format('HH:mm a')}</div>
+    </div>
+    `;
+    
+    
+    // <div class="future-forecast"> | id="current-temp" | id="weather-forecast" / class="weather-forecast-item" *5 
+
+
+
+    // Today currentTempEl / Today jour?  | weather icon | Night Day temperature 
+    // Template (boucle *5)/ Forecast 5 days.  Block .weather-forecast-item    global weatherForecastEl
+
+    
+    let otherDayForcast  = '' //type string
+  
+
+
+  /**
+   * Array.prototype.forEach()
+   * La méthode forEach() permet d'exécuter une fonction donnée sur chaque élément du tableau.
+   * array1.forEach(element => console.log(element));
+   */
+
+  /**
+   * L'opérateur d'addition et d'affectation (+=) 
+   * calcule la somme ou la concaténation de ses deux opérandes 
+   * puis affecte le résultat à la variable représentée par l'opérande gauche. 
+   * C'est le type des opérandes qui détermine s'il y a somme ou concaténation.
+   */
+
+    //Operation Asynchrone
+    data.daily.forEach((day, idx)=>{
+
+      if(idx == 0){  
+        currentTempEl.innerHTML = `
+        <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png" alt="weather icon" class="w-icon">
+        <div class="other">
+        <div class="day">${window.moment(day.dt*1000).format('dddd')}</div>
+        <div class="temp">Night - ${day.temp.night}&#176;C</div>
+        <div class="temp">Day - ${day.temp.day}&#176;C</div>
+        </div>
+        `
+      }else{
+        otherDayForcast += `
+        <div class="weather-forecast-item">
+            <div class="day">${window.moment(day.dt*1000).format('ddd')}</div>
+            <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
+            <div class="temp">Night - ${day.temp.night}&#176;C</div>
+            <div class="temp">Day - ${day.temp.day}&#176;C</div>
+        </div>
+        `
+      }
+    })
+    //Block forecast *5  boucle ou rajout de 5.  +=
+    //reecriture de tout le bloc *5 inner
+    weatherForecastEl.innerHTML = otherDayForcast;
   }
 }
